@@ -6,8 +6,8 @@ service, cloud-dyndns will (probably) work for you.
 
 # install
 
+(not yet)
 ```
-gem install cloud-dyndns
 ```
 
 # usage
@@ -20,19 +20,21 @@ where `$your_yaml_file` is a file that looks like:
 
 # config example
 
-  :credentials:
-    :provider: 'AWS'
-    :aws_secret_access_key: 'your-secretkeykeykey'
-    :aws_access_key_id: 'your-access-id'
-  :zones:
-    - :domain: "looting.biz"
-      :targets:
-        - "phl.looting.biz"
-        - "*.phl.looting.biz"
-    - :domain: "narf.io"
-      :targets:
-        - "phl.narf.io"
-        - "*.phl.narf.io"
+```yaml
+:credentials:
+  :provider: 'AWS'
+  :aws_secret_access_key: 'your-secretkeykeykey'
+  :aws_access_key_id: 'your-access-id'
+:zones:
+  - :domain: "looting.biz"
+    :targets:
+      - "phl.looting.biz"
+      - "*.phl.looting.biz"
+  - :domain: "narf.io"
+    :targets:
+      - "phl.narf.io"
+      - "*.phl.narf.io"
+```
 
 # command line options
 
