@@ -1,0 +1,17 @@
+:credentials:
+  :provider: 'AWS'
+  :aws_secret_access_key: 'honk-secret'
+  :aws_access_key_id: 'honk-key'
+:zones:
+  - :domain: "looting.biz"
+    :targets:
+      - "phl.looting.biz"
+      - "*.phl.looting.biz"
+    :ttl: 600
+  - :domain: "narf.io"
+    :targets:
+      - "phl.narf.io"
+      - "*.phl.narf.io"
+
+
+

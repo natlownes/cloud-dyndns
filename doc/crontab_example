@@ -1,0 +1,2 @@
+*/15 * * * * cd ~/.ddns && /Users/nat/.rvm/bin/ruby-1.9.2-p290@ddns phl_looting_biz.rb > ~/.ddns/out.log
+

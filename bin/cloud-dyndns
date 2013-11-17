@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require File.expand_path(File.dirname(__FILE__) + '/../cloud-dyndns')
+
+config = CloudDyndns::Config.new(ARGV)
+dns    = CloudDyndns::Updater.new(config.config, config.log)
+
+dns.update!
