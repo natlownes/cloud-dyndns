@@ -2,4 +2,5 @@ tags
 test/fixtures/test.log
 .bundle
 pkg/*
+.bundle
 
