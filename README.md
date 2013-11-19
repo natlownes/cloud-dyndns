@@ -1,5 +1,8 @@
 # cloud-dyndns
 
+[![Build
+Status](https://travis-ci.org/natlownes/cloud-dyndns.png?branch=master)](https://travis-ci.org/natlownes/cloud-dyndns)
+
 Use a cloud DNS provider like a dynamic dns service.  A Ruby executable to
 stick in a crontab.  If the excellent [fog](http://fog.io/) supports the
 service, cloud-dyndns will (probably) work for you.

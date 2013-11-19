@@ -9,6 +9,7 @@ group :test do
   gem 'mocha'
   gem 'minitest-spec-expect'
   gem 'test'
+  gem 'rake'
 end
 
 group :development do
