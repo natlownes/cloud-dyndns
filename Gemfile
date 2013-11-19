@@ -8,7 +8,6 @@ group :test do
   gem 'minitest'
   gem 'mocha'
   gem 'minitest-spec-expect'
-  gem 'test'
   gem 'rake'
 end
 
