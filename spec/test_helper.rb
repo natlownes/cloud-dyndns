@@ -6,6 +6,7 @@ require 'minitest/mock'
 require 'minitest/reporters'
 require 'minitest/matchers'
 require 'minitest/spec/expect'
+require 'mocha/setup'
 
 require File.join(File.dirname(__FILE__), '..', 'cloud-dyndns')
 

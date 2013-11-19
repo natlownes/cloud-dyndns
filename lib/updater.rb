@@ -5,7 +5,14 @@ require 'fog'
 class CloudDyndns::Updater
   class NoIPAddressError < StandardError
     def message
-      "cowardly refusing to update your DNS record to nothing"
+      "could not get your current ip address: \n
+       cowardly refusing to update your DNS record to nothing"
+    end
+  end
+
+  class NoTargetsSpecified < StandardError
+    def message
+      "no domain names to update were specified"
     end
   end
 
@@ -25,6 +32,8 @@ class CloudDyndns::Updater
       targets        = zone_config[:targets]
       top_level_zone = zone_config[:domain]
 
+      check_config_targets(top_level_zone, targets)
+
       zone = find_zone_by_name(top_level_zone)
 
       targets.each do |target|
@@ -35,8 +44,8 @@ class CloudDyndns::Updater
     updates = []
   end
 
-  def find_zone_by_name(zone_domain)
-    find_zone_by_domain(zone_domain) or create_zone_by_domain(zone_domain)
+  def zones
+    dns.zones
   end
 
   def dns
@@ -51,37 +60,29 @@ class CloudDyndns::Updater
     @zone_configs || []
   end
 
-  private
-
-  def create_dns(credentials)
-    Fog::DNS.new(credentials)
-  end
-
-  def default_ttl
-    300
-  end
-
-  def get_ip_address
-    ip_url = "http://wtfismyip.com/text"
-
-    @external_ip ||=  OpenURI.open_uri(ip_url).read.strip
+  def find_zone_by_name(zone_domain)
+    find_zone_by_domain(zone_domain) or create_zone_by_domain(zone_domain)
   end
 
   def find_zone_by_domain(domain_name)
-    dns.zones.find do |z|
+    zones.find do |z|
       z.domain.match(%r{#{domain_name}\.$})
     end
   end
 
   def create_zone_by_domain(domain_name)
-    dns.zones.create(
+    zones.create({
       :domain => domain_name,
       :email =>  "hostmaster@#{domain_name}"
-    )
+    })
+  end
+
+  def records_for_zone(zone)
+    zone.records.reload
   end
 
   def find_record_for_zone_by_name(zone, name)
-    zone.records.reload.find do |r|
+    records_for_zone(zone).find do |r|
       r.name == self.class.domain_name_to_provider_name(name)
     end
   end
@@ -93,12 +94,13 @@ class CloudDyndns::Updater
     # "example.com"
     # zone_config is the object from the zones array
     # in the yaml config
-    record     = find_record_for_zone_by_name(zone, target)
     current_ip = get_ip_address()
 
     if current_ip.empty?
-      raise new NoIPAddressError.new
+      raise NoIPAddressError.new
     end
+
+    record     = find_record_for_zone_by_name(zone, target)
 
     target_attributes = {
       :name => target,
@@ -116,6 +118,31 @@ class CloudDyndns::Updater
     end
 
     record
+  end
+
+  private
+
+  def check_config_targets(top_level_zone, targets)
+    if !targets or targets.empty?
+      @log << %{
+      #{top_level_zone} has zero targets in config, add some domains to update in your config file
+      }
+      raise NoTargetsSpecified.new
+    end
+  end
+
+  def create_dns(credentials)
+    Fog::DNS.new(credentials)
+  end
+
+  def default_ttl
+    300
+  end
+
+  def get_ip_address
+    ip_url = "http://wtfismyip.com/text"
+
+    @external_ip ||=  OpenURI.open_uri(ip_url).read.strip
   end
 
   def is_record_create?(record)

@@ -1,12 +1,16 @@
 source 'https://rubygems.org/'
 
-gem 'fog', '=1.18.0'
+gemspec
 
-group :test, :develop do
+group :test do
   gem 'minitest-reporters'
   gem 'minitest-matchers'
   gem 'minitest'
+  gem 'mocha'
+  gem 'minitest-spec-expect'
+end
+
+group :development do
   gem 'guard'
   gem 'guard-minitest'
-  gem 'minitest-spec-expect'
 end
