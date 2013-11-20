@@ -50,7 +50,7 @@ there's -c/--config and -l/--log:
 # crontab example
 
 ```
-*/15 * * * * cloud-dyndns --config /Users/nat/.cloud-dyndns.yml > ~/.cdyndns.log
+*/15 * * * * cloud-dyndns --config /Users/nat/.cloud-dyndns.yml >> ~/.cdyndns.log
 ```
 
 will make sure your domain is up to date every 15 minutes, and will log to
