@@ -39,11 +39,18 @@ where `$your_yaml_file` is the path to a file that looks like:
       - "*.phl.narf.io"
 ```
 
+# environment variables
+
+we can also config using environment variables:
+
+* ``
+
 # command line options
 
 there's -c/--config and -l/--log:
 
-* --config is mandatory:  a path to your config file
+* --config is optional if environment variables are set:  a path to your config
+  file
 * --log is optional:  if not given it will log to stdout.  if given a path it
   will log to that file.
 

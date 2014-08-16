@@ -22,12 +22,13 @@ module CloudDyndns
     end
 
     def initialize(args)
+      config_by_environment_variables(::ENV)
       check_args(args)
 
       parser = OptionParser.new do |opts|
         opts.banner = usage_banner
 
-        opts.on '-c', '--config PATH', config_instructions do |v|
+        opts.on '-c', '--config [PATH]', config_instructions do |v|
           set_config!(v)
         end
 
@@ -48,6 +49,9 @@ module CloudDyndns
     end
 
     private
+
+    def config_by_environment_variables(env)
+    end
 
     def check_args(args)
       if !args or args.length == 0

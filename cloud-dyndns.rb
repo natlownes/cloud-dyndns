@@ -2,8 +2,8 @@ require 'rubygems'
 
 
 module CloudDyndns
-  ROOTDIR=File.expand_path(File.join(File.dirname(__FILE__)))
-  LIBDIR=File.join(ROOTDIR, 'lib')
+  ROOTDIR = File.expand_path(File.join(File.dirname(__FILE__)))
+  LIBDIR  = File.join(ROOTDIR, 'lib')
 end
 
 

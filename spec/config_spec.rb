@@ -80,4 +80,3 @@ describe 'option parsing' do
 
   end #valid options
 end
-

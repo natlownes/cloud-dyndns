@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cloud-dyndns (0.0.1)
+    cloud-dyndns (1.0.0)
       fog (= 1.18.0)
 
 GEM
@@ -59,7 +59,7 @@ GEM
     multi_json (1.8.2)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
+    net-ssh (2.8.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     powerbar (1.0.11)
